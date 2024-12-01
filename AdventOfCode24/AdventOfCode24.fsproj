@@ -6,7 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Program.fs"/>
         <None Include="day01\day01.fsx" />
         <Content Include="day01\input.txt" />
         <Content Include=".gitignore" />
