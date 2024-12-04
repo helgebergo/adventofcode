@@ -1,57 +1,33 @@
-module Aoc2024.Day02
+module aoc24.day02
 
-open System
-open System.IO
+let getReports (input: string) =
+    input.Split('\n')
+    |> Array.toList
+    |> List.map (fun line ->
+        line.Split(' ') 
+        |> Array.toList
+        |> List.map int
+    )
 
-let inputFile = "AdventOfCode24/day01/input.txt"
-
-let parseInput (filePath: string) =
-    File.ReadLines(filePath)
-    |> Seq.choose (fun line ->
-        match line.Split([| ' '; '\t' |], StringSplitOptions.RemoveEmptyEntries) |> Array.map int with
-        | [| x; y |] -> Some (x, y)
-        | _ -> None)
-    |> Seq.toList
-
-let sortColumns (pairs: (int * int) list) =
-    let sortedCol1, sortedCol2 =
-        pairs
-        |> List.unzip
-        |> fun (col1, col2) -> List.sort col1, List.sort col2
-    List.zip sortedCol1 sortedCol2 
-
-let computeSumOfDifferences pairs =
-    pairs
-    |> List.unzip
-    |> fun (col1, col2) -> List.map2 (fun x y -> abs (x - y)) col1 col2 
-    |> List.sum
-
-// part 1
-let part1 =
-    let parsedPairs = parseInput inputFile
-    let sortedColumns = sortColumns parsedPairs
-    let result = computeSumOfDifferences sortedColumns
-    printfn $"Sum: %d{result}"
-
-
-// part 2
-let parsedPairs = parseInput inputFile
-
-let lefts = parsedPairs |> List.map fst
-let rights = parsedPairs |> List.map snd
-
-let counts =
-    lefts
-    |> List.map (fun left ->
-        let count = rights |> List.filter (fun right -> right = left) |> List.length
-        (left, count))
-        
-printfn $"Counts= %A{counts}"
-
-let sumOfCounts =
-    counts
-    |> List.unzip
-    |> fun (num, count) -> List.map2 (fun x y -> x*y) num count
-    |> List.sum
+let isReportSafe (report: int list) : bool =
+    let isDescending = report[0] >= report[1]
     
-printfn $"Sum of counts:%d{sumOfCounts}" 
+    let arePairsSafe =
+        report
+        |> List.pairwise
+        |> List.map (fun (first, second) ->
+            first <> second &&
+            ((first < second) = not isDescending) &&    
+            let difference = abs (second - first)
+            difference >= 1 && difference <= 3
+        )
+    
+    arePairsSafe
+    |> List.forall id
+
+let part01 (input: string) =
+    getReports input
+    |> List.map isReportSafe
+    |> List.filter (fun report -> report = true)
+    |> List.length
+    |> printfn "\nSafe reports: %A"
