@@ -25,9 +25,28 @@ let isReportSafe (report: int list) : bool =
     arePairsSafe
     |> List.forall id
 
-let part01 (input: string) =
-    getReports input
-    |> List.map isReportSafe
+let aggregateReports report=
+    report
     |> List.filter (fun report -> report = true)
     |> List.length
-    |> printfn "\nSafe reports: %A"
+
+let part1 (input: string) =
+    getReports input
+    |> List.map isReportSafe
+    |> aggregateReports
+    
+let reportWithProblemDamperApplied (report: list<int>) =
+    report
+    |> List.mapi (fun i _ ->
+        report |> List.mapi (fun j x -> if i <> j then Some x else None)
+        |> List.choose id
+    )
+
+let part2 (input: string) =
+    getReports input
+    |> List.map reportWithProblemDamperApplied
+    |> List.map (fun reportList ->
+                                reportList
+                                   |> List.exists isReportSafe)
+    |> aggregateReports
+    

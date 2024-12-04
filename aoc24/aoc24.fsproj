@@ -8,12 +8,14 @@
     <ItemGroup>
         <Compile Include="day01.fs" />
         <Compile Include="day02.fs" />
+        <Compile Include="day03.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="bin\Debug\" />
       <Content Include="bin\day01.txt" />
+      <Content Include="bin\day03.txt" />
       <Content Include="bin\day02.txt" />
     </ItemGroup>
 
