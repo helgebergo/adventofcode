@@ -12,8 +12,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="day01.txt" />
-      <Content Include="day02.txt" />
+      <Folder Include="bin\Debug\" />
+      <Content Include="bin\day01.txt" />
+      <Content Include="bin\day02.txt" />
     </ItemGroup>
 
 </Project>
