@@ -1,7 +1,9 @@
+module aoc24.day01
+
 open System
 open System.IO
 
-let inputFile = "AdventOfCode24/day01/input.txt"
+let inputFile = "AdventOfCode24/day01/day01.txt"
 
 let parseInput (filePath: string) =
     File.ReadLines(filePath)
@@ -34,7 +36,12 @@ with
 | ex ->
     printfn $"Error: %s{ex.Message}"
 
-
+let part01 =
+    let parsedPairs = parseInput inputFile
+    let sortedColumns = sortColumns parsedPairs
+    let result = computeSumOfDifferences sortedColumns
+    printfn $"Sum: %d{result}"
+    
 // part 2
 let parsedPairs = parseInput inputFile
 
