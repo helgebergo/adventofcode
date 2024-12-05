@@ -16,3 +16,6 @@ let extractAndMultiplyMuls(input: string) =
 
 let part1(input: string) =
     extractAndMultiplyMuls input
+
+let part2(input: string) =
+    extractAndMultiplyMuls input
