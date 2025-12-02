@@ -21,6 +21,7 @@
       <Content Include="bin\day04.txt" />
       <Content Include="bin\day05.txt" />
       <Content Include="bin\day02.txt" />
+      <Content Include="bin\day06.txt" />
     </ItemGroup>
 
 </Project>
