@@ -1,6 +1,6 @@
 ﻿namespace aoc25;
 
-public class Main1
+public class Day1
 {
 	private static List<Instruction> ParseInput(string input) => input.Split("\n").Select(l => new Instruction(l[0], int.Parse(l[1..]))).ToList();
 	

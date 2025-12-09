@@ -8,7 +8,7 @@ public class Day7
 	public static void Run()
 	{
 		const string txt = ".......S.......\n...............\n.......^.......\n...............\n......^.^......\n...............\n.....^.^.^.....\n...............\n....^.^...^....\n...............\n...^.^...^.^...\n...............\n..^...^.....^..\n...............\n.^.^.^.^.^...^.\n...............";
-		// var input = File.ReadAllText("input07.txt");
+		// var txt = File.ReadAllText("input07.txt");
 		var input = txt.Split("\n");
 
 		var cells = new Cell[input.Length, input.First().Length];
@@ -17,13 +17,11 @@ public class Day7
 				cells[r, c] = new Cell(input[r][c], r, c);
 
 		var grid = new Grid(cells);
-		Console.WriteLine(grid);
 
 		var start = grid.First(c => c.IsStart);
 		if (start is null)
 			throw new Exception("Start cell is null");
 		cells[start.Row + 1, start.Col].Beam();
-		// grid.Beam(start);
 		
 		Console.WriteLine(grid);
 		for (var i = 1; i < cells.GetLength(0); i++)
@@ -33,7 +31,6 @@ public class Day7
 				if (grid.Check(cells[i, j]))
 					grid.BeamOn(cells[i, j]);
 			}
-			Console.WriteLine(grid);
 		}
 
 		Console.WriteLine(grid);

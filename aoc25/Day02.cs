@@ -1,6 +1,6 @@
 ﻿namespace aoc25;
 
-public class Main2
+public static class Day2
 {
 	public static void Run()
 	{
@@ -17,29 +17,23 @@ public class Main2
 
 	private static void Part2(IEnumerable<Tuple<long, long>> ranges)
 	{
-		long sum = 0;
+		HashSet<long> hash = [];
 		foreach (var tuple in ranges)
 		{
-			for (var code = tuple.Item1; code <= tuple.Item2; code++)
+			for (var value = tuple.Item1; value <= tuple.Item2; value++)
 			{
-				var str = code.ToString();
-
-				var ff = 0;
-				for (var i = 1; i <= str.Length; i++)
+				var code = value.ToString();
+				
+				for (var i = 1; i <= code.Length; i++)
 				{
-					var sub = str[..i];
-					if (str[i..].Contains(sub))
-					{
-						Console.WriteLine($"Code: {code}, {sub}-{str[i..]}");
-						ff++;
-					}
+					var part = code[..i];
+					if (part == code[i..])
+						hash.Add(value);
 				}
-				if (ff > 0)
-					sum += code;
 			}
 		}
 
-		Console.WriteLine($"Part 2: {sum}");
+		Console.WriteLine($"Part 2: {hash.Sum()}");
 	}
 
 	private static void Part1(IEnumerable<Tuple<long, long>> codes)
